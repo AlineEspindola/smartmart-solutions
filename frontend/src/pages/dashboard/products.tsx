@@ -16,7 +16,7 @@ export default function ProductsDashboard() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatsCard title="Total de Produtos" value={totalProducts} />
         <StatsCard title="Marcas" value={totalBrands} />
-        <StatsCard title="Categorias" value="12" />
+        <StatsCard title="Categorias em Uso" value="12" />
         <StatsCard title="Valor Total em Estoque" value={`R$ ${totalPriceSum.toFixed(2)}`} />
       </div>
 
