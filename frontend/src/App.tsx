@@ -1,11 +1,11 @@
-import './App.css'
-import { ProductsProvider } from './contexts/ProductsContext'
-import ProductsDashboard from './pages/dashboard/products'
+import "./App.css"
+import { ProductsProvider } from "./contexts/ProductsContext"
+import { AppRoutes } from "./routes/routes"
 
 function App() {
   return (
     <ProductsProvider>
-      <ProductsDashboard />
+      <AppRoutes />
     </ProductsProvider>
   )
 }
