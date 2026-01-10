@@ -6,27 +6,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import type { Product } from "@/types/types"
+interface ProductTableProps {
+  products: Product[]; 
+}
 
-const products = [
-  {
-    id: 1,
-    name: "Notebook Dell",
-    category: "Eletrônicos",
-    price: "R$ 5.200",
-    description: "Notebook Dell Inspiron 15 3000",
-    brand: "Dell Brasil",
-  },
-  {
-    id: 2,
-    name: "Mouse Logitech",
-    category: "Acessórios",
-    price: "R$ 180",
-    description: "Mouse sem fio Logitech M185",
-    brand: "Logitech",
-  },
-]
-
-export function ProductTable() {
+export function ProductTable({ products }: ProductTableProps) {
   return (
     <Table>
       <TableHeader>
@@ -43,7 +28,7 @@ export function ProductTable() {
         {products.map((product) => (
           <TableRow key={product.id}>
             <TableCell className="font-medium">{product.name}</TableCell>
-            <TableCell>{product.category}</TableCell>
+            <TableCell>{product.category_id}</TableCell>
             <TableCell>{product.price}</TableCell>
             <TableCell>{product.description}</TableCell>
             <TableCell>{product.brand}</TableCell>
