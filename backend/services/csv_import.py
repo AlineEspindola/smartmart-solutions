@@ -1,6 +1,6 @@
 import csv
 import io
-from models import Product, Sale, db
+from models import Category, Product, Sale, db
 from datetime import datetime
 
 def import_products_from_csv(file_bytes):
@@ -35,3 +35,18 @@ def import_sales_from_csv(file_bytes):
         count += 1
     db.session.commit()
     return count
+  
+def import_categories_from_csv(file_bytes):
+    content = file_bytes.decode("utf-8")
+    reader = csv.DictReader(io.StringIO(content))
+    count = 0
+    for row in reader:
+        exists = Category.query.filter_by(name=row["name"]).first()
+        if exists:
+            continue
+        category = Category(name=row["name"])
+        db.session.add(category)
+        count += 1
+    db.session.commit()
+    return count
+
