@@ -1,13 +1,8 @@
 import './App.css'
+import ProductsDashboard from './pages/dashboard/products'
 
 function App() {
-  return (
-    <>
-      <div>
-        <h1 className="text-blue-600" >Smartmart Solutions</h1>
-      </div>
-    </>
-  )
+  return <ProductsDashboard />
 }
 
 export default App
