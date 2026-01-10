@@ -29,7 +29,7 @@ export function ProductTable({ products }: ProductTableProps) {
           <TableRow key={product.id}>
             <TableCell className="font-medium">{product.name}</TableCell>
             <TableCell>{product.category_id}</TableCell>
-            <TableCell>{product.price}</TableCell>
+            <TableCell>R$ {product.price.toFixed(2)}</TableCell>
             <TableCell>{product.description}</TableCell>
             <TableCell>{product.brand}</TableCell>
           </TableRow>
