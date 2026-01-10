@@ -16,7 +16,7 @@ export default function ProductsDashboard() {
         <StatsCard title="Total de Produtos" value={totalProducts} />
         <StatsCard title="Marcas" value={totalBrands} />
         <StatsCard title="Categorias" value="12" />
-        <StatsCard title="Valor Total em Estoque" value={totalPriceSum} />
+        <StatsCard title="Valor Total em Estoque" value={`R$ ${totalPriceSum.toFixed(2)}`} />
       </div>
 
       <div className="rounded-lg border bg-background">
