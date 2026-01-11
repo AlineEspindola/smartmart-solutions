@@ -13,6 +13,7 @@ interface ProductsContextData {
   totalProducts: number;
   totalBrands: number;
   totalPriceSum: number;
+  totalCategories: number;
   addProduct: (product: Omit<Product, "id">) => Promise<void>;
   uploadCSV: (file: File) => Promise<void>;
   refreshProducts: () => Promise<void>;
@@ -52,6 +53,9 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
   const totalBrands = new Set(products.map((p) => p.brand).filter(Boolean))
     .size;
   const totalPriceSum = products.reduce((sum, p) => sum + p.price, 0);
+  const totalCategories = new Set(
+    products.map((p) => p.category_id).filter(Boolean)
+  ).size;
 
   return (
     <ProductsContext.Provider
@@ -61,6 +65,7 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
         totalProducts,
         totalBrands,
         totalPriceSum,
+        totalCategories,
         addProduct,
         uploadCSV,
         refreshProducts,

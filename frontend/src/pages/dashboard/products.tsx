@@ -4,7 +4,7 @@ import { useProducts } from "@/hooks/useProducts";
 import { Loading } from "./loading";
 
 export default function ProductsDashboard() {
-  const { products, loading, totalProducts, totalBrands, totalPriceSum } =
+  const { products, loading, totalProducts, totalBrands, totalPriceSum, totalCategories } =
     useProducts();
 
   if (loading) return <Loading/>;
@@ -16,7 +16,7 @@ export default function ProductsDashboard() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatsCard title="Total de Produtos" value={totalProducts} />
         <StatsCard title="Marcas" value={totalBrands} />
-        <StatsCard title="Categorias em Uso" value="12" />
+        <StatsCard title="Categorias em Uso" value={totalCategories} />
         <StatsCard title="Valor Total em Estoque" value={`R$ ${totalPriceSum.toFixed(2)}`} />
       </div>
 
