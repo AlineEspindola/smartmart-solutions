@@ -101,6 +101,7 @@ export function ProductTable({ products }: ProductTableProps) {
                   });
                 }
               }}
+              required
             />
 
             <Input
@@ -109,6 +110,7 @@ export function ProductTable({ products }: ProductTableProps) {
               onChange={(e) =>
                 setFormData({ ...formData, brand: e.target.value })
               }
+              required
             />
 
             <Input
@@ -120,6 +122,7 @@ export function ProductTable({ products }: ProductTableProps) {
                   description: e.target.value,
                 })
               }
+              required
             />
 
             <Input
@@ -132,6 +135,7 @@ export function ProductTable({ products }: ProductTableProps) {
                   category_id: Number(e.target.value),
                 })
               }
+              required
             />
 
             <div className="flex justify-end pt-2">
