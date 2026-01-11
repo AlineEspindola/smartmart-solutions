@@ -71,7 +71,6 @@ export function ProductTable({ products }: ProductTableProps) {
         </label>
       </div>
 
-      {/* MODAL */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:max-w-2xl">
           <DialogHeader>
@@ -89,16 +88,19 @@ export function ProductTable({ products }: ProductTableProps) {
             />
 
             <Input
-              type="number"
+              type="text"
               placeholder="Preço"
               value={formData.price}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  price: Number(e.target.value),
-                })
-              }
-              required
+              onChange={(e) => {
+                const value = e.target.value.replace(",", ".");
+
+                if (/^\d*\.?\d*$/.test(value)) {
+                  setFormData({
+                    ...formData,
+                    price: Number(value), 
+                  });
+                }
+              }}
             />
 
             <Input
@@ -139,7 +141,6 @@ export function ProductTable({ products }: ProductTableProps) {
         </DialogContent>
       </Dialog>
 
-      {/* EMPTY STATE */}
       {products.length === 0 ? (
         <div className="flex flex-col items-center justify-center gap-4 rounded-lg border border-dashed p-10 text-center">
           <PackageOpen className="h-10 w-10 text-muted-foreground" />

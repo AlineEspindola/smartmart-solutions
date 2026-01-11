@@ -1,7 +1,11 @@
 // src/contexts/ProductsContext.tsx
 import { createContext, useState, useEffect, type ReactNode } from "react";
 import type { Product } from "../types/types";
-import { fetchProducts, createProduct, uploadProductsCSV } from "../services/products";
+import {
+  fetchProducts,
+  createProduct,
+  uploadProductsCSV,
+} from "../services/products";
 
 interface ProductsContextData {
   products: Product[];
@@ -35,8 +39,8 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const addProduct = async (product: Omit<Product, "id">) => {
-    const newProduct = await createProduct(product);
-    setProducts((prev) => [...prev, newProduct]);
+    await createProduct(product);
+    await refreshProducts();
   };
 
   const uploadCSV = async (file: File) => {
@@ -45,7 +49,8 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const totalProducts = products.length;
-  const totalBrands = new Set(products.map((p) => p.brand).filter(Boolean)).size;
+  const totalBrands = new Set(products.map((p) => p.brand).filter(Boolean))
+    .size;
   const totalPriceSum = products.reduce((sum, p) => sum + p.price, 0);
 
   return (
@@ -66,5 +71,7 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const ProductsContext = createContext<ProductsContextData | undefined>(undefined);
+const ProductsContext = createContext<ProductsContextData | undefined>(
+  undefined
+);
 export default ProductsContext;
