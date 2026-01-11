@@ -18,6 +18,14 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { PackageOpen } from "lucide-react";
+import { useCategories } from "@/hooks/useCategories";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 interface ProductTableProps {
   products: Product[];
@@ -25,6 +33,7 @@ interface ProductTableProps {
 
 export function ProductTable({ products }: ProductTableProps) {
   const { addProduct, uploadCSV } = useProducts();
+  const { categories, loading: categoriesLoading } = useCategories();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -51,6 +60,16 @@ export function ProductTable({ products }: ProductTableProps) {
   const handleCSV = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) await uploadCSV(e.target.files[0]);
   };
+
+  const categoryMap = React.useMemo(() => {
+    const map: Record<number, string> = {};
+    categories.forEach((category) => {
+      if (category.id) {
+        map[category.id] = category.name;
+      }
+    });
+    return map;
+  }, [categories]);
 
   return (
     <div className="space-y-4">
@@ -96,7 +115,7 @@ export function ProductTable({ products }: ProductTableProps) {
                 if (/^\d*\.?\d*$/.test(value)) {
                   setFormData({
                     ...formData,
-                    price: Number(value), 
+                    price: Number(value),
                   });
                 }
               }}
@@ -124,18 +143,33 @@ export function ProductTable({ products }: ProductTableProps) {
               required
             />
 
-            <Input
-              type="number"
-              placeholder="Categoria ID"
-              value={formData.category_id}
-              onChange={(e) =>
+            <Select
+              value={formData.category_id?.toString()}
+              onValueChange={(value: unknown) =>
                 setFormData({
                   ...formData,
-                  category_id: Number(e.target.value),
+                  category_id: Number(value),
                 })
               }
-              required
-            />
+            >
+              <SelectTrigger>
+                <SelectValue
+                  placeholder={
+                    categoriesLoading
+                      ? "Carregando categorias..."
+                      : "Selecione a categoria"
+                  }
+                />
+              </SelectTrigger>
+
+              <SelectContent>
+                {categories.map((category) => (
+                  <SelectItem key={category.id} value={category.id!.toString()}>
+                    {category.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
             <div className="flex justify-end pt-2">
               <Button type="submit">Salvar</Button>
@@ -189,7 +223,10 @@ export function ProductTable({ products }: ProductTableProps) {
             {products.map((product) => (
               <TableRow key={product.id}>
                 <TableCell className="font-medium">{product.name}</TableCell>
-                <TableCell>{product.category_id}</TableCell>
+                <TableCell>
+                  {categoryMap[product.category_id] ??
+                    "Categoria não encontrada"}
+                </TableCell>
                 <TableCell>R$ {product.price.toFixed(2)}</TableCell>
                 <TableCell>{product.description}</TableCell>
                 <TableCell>{product.brand}</TableCell>
