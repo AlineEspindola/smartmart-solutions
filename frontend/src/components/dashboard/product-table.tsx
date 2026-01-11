@@ -54,7 +54,6 @@ export function ProductTable({ products }: ProductTableProps) {
 
   return (
     <div className="space-y-4">
-      {/* AÇÕES */}
       <div className="flex justify-end gap-2 p-2">
         <Button onClick={() => setIsModalOpen(true)}>Adicionar Produto</Button>
 
@@ -175,7 +174,6 @@ export function ProductTable({ products }: ProductTableProps) {
           </div>
         </div>
       ) : (
-        /* TABELA */
         <Table>
           <TableHeader>
             <TableRow>

@@ -1,13 +1,16 @@
-import "./App.css"
-import { ProductsProvider } from "./contexts/ProductsContext"
-import { AppRoutes } from "./routes/routes"
+import "./App.css";
+import { CategoriesProvider } from "./contexts/CategoriesContext";
+import { ProductsProvider } from "./contexts/ProductsContext";
+import { AppRoutes } from "./routes/routes";
 
 function App() {
   return (
     <ProductsProvider>
-      <AppRoutes />
+      <CategoriesProvider>
+        <AppRoutes />
+      </CategoriesProvider>
     </ProductsProvider>
-  )
+  );
 }
 
-export default App
+export default App;
