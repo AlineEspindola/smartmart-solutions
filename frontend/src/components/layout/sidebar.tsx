@@ -7,6 +7,7 @@ import clsx from "clsx"
 const navItems = [
   { label: "Produtos", to: "/", icon: Package },
   { label: "Categorias", to: "/categories", icon: Layers },
+  { label: "Vendas", to: "/sales", icon: Package },
 ]
 
 export function Sidebar() {
