@@ -1,13 +1,13 @@
 import { StatsCard } from "@/components/dashboard/stats-card";
 import { ProductTable } from "@/components/dashboard/product-table";
 import { useProducts } from "@/hooks/useProducts";
-import { ProductsLoading } from "./products-loading";
+import { Loading } from "./loading";
 
 export default function ProductsDashboard() {
   const { products, loading, totalProducts, totalBrands, totalPriceSum } =
     useProducts();
 
-  if (loading) return <ProductsLoading/>;
+  if (loading) return <Loading/>;
 
   return (
     <div className="space-y-6 p-6">

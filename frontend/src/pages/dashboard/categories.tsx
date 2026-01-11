@@ -1,12 +1,12 @@
 import { useCategories } from "@/hooks/useCategories";
-import { ProductsLoading } from "./products-loading";
+import { Loading } from "./loading";
 import { CategoryTable } from "@/components/dashboard/category-table";
 
 export default function ProductsDashboard() {
   const { categories, loading } =
     useCategories();
 
-  if (loading) return <ProductsLoading/>;
+  if (loading) return <Loading/>;
 
   return (
     <div className="space-y-6 p-6">
